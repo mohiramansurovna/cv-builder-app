@@ -1,7 +1,4 @@
 header{
-    font-family: 'Quicksand', sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

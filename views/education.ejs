@@ -1,27 +1,33 @@
-<ul id="experiencesList">
-    <button onclick="addExperience()">add experience</button>
-    <% if(experience && experience.length > 0) { %> <% experience.forEach(exp => { %>
+<ul id="educationList">
+    <button onclick="addEducation()">add education</button>
+    <% if(education && education.length > 0) { %> <% education.forEach(exp => { %>
     <li id="<%= exp.id %>">
-        <h3> <%= exp.job_title %> </h3>
-        <h4> at <strong><%= exp.company_name %></strong> </h4>
+        <h3> <%= exp.degree %> </h3>
+        <h4> in <strong><%= exp.field_of_study %></strong> </h4>
+        <p>in <span> <%= exp.location %> </span> </p>
+        <p> from <strong><%= exp.institution %></strong> </p>
         <p><span> <%= exp.start_date %></span> to <span><%= exp.end_date %></span></p>
         <p><%= exp.description %></p>
         <div>
-            <button data-id="<%= exp.id %>" onclick="editExperience(this)">Edit</button>
-            <button data-id="<%= exp.id %>" onclick="deleteExperience(this)">Delete</button>
+            <button data-id="<%= exp.id %>" onclick="editEducation(this)">Edit</button>
+            <button data-id="<%= exp.id %>" onclick="deleteEducation(this)">Delete</button>
         </div>
     </li>
     <% }) %> <% } else { %>
-    <p>No experience found.</p>
+    <p>No education found.</p>
     <% } %>
 </ul>
-<form class="userDataForm experiencesForm" onsubmit="experienceFormSubmit(event)">
-    <h1>Experience</h1>
+<form class="userDataForm educationForm" onsubmit="formSubmit(event)">
+    <h1>Education</h1>
     <input type="hidden" name="user_id" value="<%= user.id %>" />
-    <label>Job Title</label>
-    <input type="text" name="job_title" required />
-    <label>Company Name</label>
-    <input type="text" name="company_name" required />
+    <label>Degree</label>
+    <input type="text" name="degree" required />
+    <label>Field of Study</label>
+    <input type="text" name="field_of_study" required />
+    <label>Institution</label>
+    <input type="text" name="institution" required />
+    <label>Location</label>
+    <input type="text" name="location" required />
     <div>
         <div>
             <label>Start Date</label>
@@ -37,20 +43,18 @@
     <p id="error"></p>
     <p id="loading"></p>
     <div>
-        <button type="button" onclick="cancelAddExperience()">Cancel</button>
-        <button type="submit" id="submitButton">Add experience</button>
+        <button type="button" onclick="cancelAddEducation()">Cancel</button>
+        <button type="submit" id="submitButton">Add Education</button>
     </div>
 </form>
 
 <script>
-    function experienceFormSubmit(event) {
-        console.log('formSubmit called');
-        const form = document.querySelector('.experiencesForm');
+    function formSubmit(event) {
+        const form = document.querySelector('.educationForm');
         event.preventDefault();
         const formData = new FormData(form);
-        const { user_id, job_title, company_name, start_date, end_date, description } = Object.fromEntries(formData.entries());
-        if (!user_id || !job_title || !company_name || !start_date || !end_date || !description) {
-            console.log('Please fill in all required fields', user_id, job_title, company_name, start_date, end_date, description);
+        const { user_id, degree, field_of_study, institution, location, start_date, end_date, description } = Object.fromEntries(formData.entries());
+        if (!user_id || !degree || !field_of_study || !institution || !location || !start_date || !end_date || !description) {
             document.getElementById('error').innerHTML = 'Please fill in all required fields';
             return;
         }
@@ -71,15 +75,17 @@
         };
 
         startTransition(async () => {
-            await fetch('/api/experience', {
+            await fetch('/api/education', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     user_id,
-                    job_title,
-                    company_name,
+                    degree,
+                    field_of_study,
+                    institution,
+                    location,
                     start_date,
                     end_date,
                     description,
@@ -87,18 +93,20 @@
             })
                 .then(async (res) => {
                     if (res.ok) {
-                        const ul = document.getElementById('experiencesList');
+                        const ul = document.getElementById('educationList');
                         const li = document.createElement('li');
                         const data = await res.json();
                         li.id = data.id;
                         li.innerHTML = `
-                        <h3>${job_title}</h3>
-                        <h4>at <strong>${company_name}</strong></h4>
+                        <h3>${degree}</h3>
+                        <h4>in <strong>${field_of_study}</strong></h4>
+                        <p><span>in ${location}</span></p>
+                        <p>from <strong>${institution}</strong></p>
                         <p><span>${start_date}</span> to <span>${end_date}</span></p>
                         <p>${description}</p>
                         <div>
-                            <button data-id="${data.id}" onclick="editExperience(this)">Edit</button>
-                            <button data-id="${data.id}" onclick="deleteExperience(this)">Delete</button>
+                            <button data-id="${data.id}" onclick="editEducation(this)">Edit</button>
+                            <button data-id="${data.id}" onclick="deleteEducation(this)">Delete</button>
                         </div> 
                         `;
                         ul.appendChild(li);
@@ -114,15 +122,15 @@
                 });
         });
     }
-    function addExperience() {
-        const form = document.querySelector('.experiencesForm');
+    function addEducation() {
+        const form = document.querySelector('.educationForm');
         form.style.display = form.style.display === 'flex' ? 'none' : 'flex';
     }
-    function cancelAddExperience() {
-        const form = document.querySelector('.userDataForm.experiencesForm');
+    function cancelAddEducation() {
+        const form = document.querySelector('.userDataForm.educationForm');
         form.style.display = 'none';
     }
-    function deleteExperience(button) {
+    function deleteEducation(button) {
         const id = button.getAttribute('data-id');
         const startTransition = (callback) => {
             try {
@@ -135,7 +143,7 @@
             }
         };
         startTransition(async () => {
-            await fetch(`/api/experience/${id}`, {
+            await fetch(`/api/education/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -150,25 +158,30 @@
         });
     }
 
-    function editExperience(button) {
+    function editEducation(button) {
         const id = button.getAttribute('data-id');
         const li = document.getElementById(id);
-        const job_title = li.querySelector('h3').innerText;
-        const company_name = li.querySelector('h4 strong').innerText;
-       const start_date = li.querySelector('p:nth-of-type(1) span:nth-of-type(1)').innerText;
-        const end_date = li.querySelector('p:nth-of-type(1) span:nth-of-type(2)').innerText;
-        const description = li.querySelector('p:nth-of-type(2)').innerText;
+        const degree = li.querySelector('h3').innerText;
+        const field_of_study = li.querySelector('h4 strong').innerText;
+        const location = li.querySelector('p:nth-of-type(1) span').innerText;
+        const institution = li.querySelector('p:nth-of-type(2) strong').innerText;
+        const start_date = li.querySelector('p:nth-of-type(3) span:nth-of-type(1)').innerText;
+        const end_date = li.querySelector('p:nth-of-type(3) span:nth-of-type(2)').innerText;
+        const description = li.querySelector('p:nth-of-type(4)').innerText;
 
-        const form = document.querySelector('.experiencesForm');
+        const form = document.querySelector('.educationForm');
         form.style.display = 'flex';
-        form.job_title.value = job_title;
-        form.company_name.value = company_name;
+        form.degree.value = degree;
+        form.field_of_study.value = field_of_study;
+        form.location.value = location;
+        form.institution.value = institution;
         form.start_date.value = start_date;
         form.end_date.value = end_date;
         form.description.value = description;
 
         form.onsubmit = function (event) {
             event.preventDefault();
+
             const startTransition = (callback) => {
                 try {
                     document.getElementById('loading').innerHTML = 'Loading...';
@@ -182,8 +195,8 @@
 
             startTransition(async () => {
                 const formData = new FormData(form);
-                const { user_id, job_title, company_name, start_date, end_date, description } = Object.fromEntries(formData.entries());
-                if (!user_id || !job_title || !company_name || !start_date || !end_date|| !description) {
+                const { user_id, degree, field_of_study, institution, location, start_date, end_date, description } = Object.fromEntries(formData.entries());
+                if (!user_id || !degree || !field_of_study || !institution || !location || !start_date || !end_date || !description) {
                     document.getElementById('error').innerHTML = 'Please fill in all required fields';
                     return;
                 }
@@ -191,27 +204,31 @@
                     document.getElementById('error').innerHTML = 'Start date cannot be after end date';
                     return;
                 }
-                await fetch(`/api/experience/${id}`, {
+                await fetch(`/api/education/${id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        user_id, 
-                        job_title, 
-                        company_name, 
-                        start_date, 
-                        end_date, 
-                        description
+                        user_id,
+                        degree,
+                        field_of_study,
+                        institution,
+                        location,
+                        start_date,
+                        end_date,
+                        description,
                     }),
                 })
                     .then(async (res) => {
                         if (res.ok) {
-                            li.querySelector('h3').innerText = job_title;
-                            li.querySelector('h4 strong').innerText = company_name;
-                            li.querySelector('p:nth-of-type(1) span:nth-of-type(1)').innerText = start_date;
-                            li.querySelector('p:nth-of-type(1) span:nth-of-type(2)').innerText = end_date;
-                            li.querySelector('p:nth-of-type(2)').innerText = description;
+                            li.querySelector('h3').innerText = degree;
+                            li.querySelector('h4 strong').innerText = field_of_study;
+                            li.querySelector('p:nth-of-type(1) span').innerText = location;
+                            li.querySelector('p:nth-of-type(2) strong').innerText = institution;
+                            li.querySelector('p:nth-of-type(3) span:nth-of-type(1)').innerText = start_date;
+                            li.querySelector('p:nth-of-type(3) span:nth-of-type(2)').innerText = end_date;
+                            li.querySelector('p:nth-of-type(4)').innerText = description;
 
                             form.reset();
                             form.style.display = 'none';

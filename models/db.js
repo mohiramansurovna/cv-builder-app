@@ -4,7 +4,7 @@ const db = new sqlite3.Database('database.db');
 db.serialize(() => {
     //USER TABLE
     db.run(`CREATE TABLE IF NOT EXISTS users (
-  id TEXT PRIMARY KEY,
+  id TEXT PRIMARY KEY UNIQUE,
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
   email TEXT NOT NULL UNIQUE,
@@ -16,7 +16,7 @@ db.serialize(() => {
 `);
     //EXPERIENCE TABLE
     db.run(`CREATE TABLE IF NOT EXISTS experiences (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id TEXT PRIMARY KEY UNIQUE,
   user_id INTEGER NOT NULL,
   job_title TEXT NOT NULL,
   company_name TEXT NOT NULL,
@@ -28,7 +28,7 @@ db.serialize(() => {
 `)
     //SKILLS TABLE
     db.run(`CREATE TABLE IF NOT EXISTS skills (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id TEXT PRIMARY KEY UNIQUE,
   user_id INTEGER NOT NULL,
   skill_name TEXT NOT NULL,
   skill_level TEXT, -- E.g., Beginner, Intermediate, Advanced
@@ -37,44 +37,24 @@ db.serialize(() => {
 `)
     //EDUCATION TABLE
     db.run(`CREATE TABLE IF NOT EXISTS education (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id TEXT PRIMARY KEY UNIQUE,
   user_id INTEGER NOT NULL,
-  degree TEXT NOT NULL, -- E.g., Bachelor's, Master's
+  degree TEXT NOT NULL,
+  field_of_study TEXT NOT NULL,
   institution TEXT NOT NULL,
+  location TEXT,
   start_date TEXT,
   end_date TEXT,
   description TEXT,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 `)
-    //CERTIFICATIONS TABLE
-    db.run(`CREATE TABLE IF NOT EXISTS certifications (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  user_id INTEGER NOT NULL,
-  certification_name TEXT NOT NULL,
-  issuing_organization TEXT,
-  issue_date TEXT,
-  expiration_date TEXT, -- Can be NULL if no expiration
-  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
-`)
     //LANGUAGES TABLE
     db.run(`CREATE TABLE IF NOT EXISTS languages (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id TEXT PRIMARY KEY UNIQUE,
   user_id INTEGER NOT NULL,
   language_name TEXT NOT NULL,
   proficiency_level TEXT, -- E.g., Native, Fluent, Beginner
-  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
-`)
-    //PERSONAL PROJECTS TABLE
-    db.run(`CREATE TABLE IF NOT EXISTS personal_projects (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  user_id INTEGER NOT NULL,
-  project_name TEXT NOT NULL,
-  project_description TEXT,
-  technologies_used TEXT,
-  link TEXT,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 `)

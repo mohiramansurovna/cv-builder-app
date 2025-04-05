@@ -5,6 +5,7 @@ const router = express.Router();
 router.use('/user', userRouter);
 router.use('/api',apiRouter);
 const jwt = require('jsonwebtoken');
+
 router.get('/',(req,res)=>{
     const token=req.cookies.token;
     if(!token){

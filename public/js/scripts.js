@@ -60,7 +60,7 @@ async function handleRegister() {
                 window.location.href = '/user/' + id;
             } else {
                 const error = document.getElementById('error');
-                console.log(res.status);
+                console.error(res.status);
                 error.innerHTML = await res.text();
             }
         }).catch(

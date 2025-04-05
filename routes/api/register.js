@@ -5,6 +5,7 @@ const registerRouter = express.Router();
 const db = require('../../models/db.js');
 const { v4 } = require('uuid');
 const bcryptjs = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 registerRouter.post('/', registerValidator, async (req, res) => {
     if (!req.body) {
         return res.status(400).send('No data provided');

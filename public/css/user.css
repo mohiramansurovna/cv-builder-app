@@ -1,0 +1,146 @@
+#userPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    min-height: 85vh;
+}
+#userPage nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-bottom:solid 1px #0074d9;
+    height: auto;
+}
+#userPage nav button{
+    border: none;
+    color: #0074d9;
+    background-color: transparent;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin: 0 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+#userPage nav button:hover{
+    color: #ffdc00;
+}
+#userPage nav button.active{
+    color: #ffdc00;
+    text-decoration: underline;
+}
+#userPage section{
+    display: flex;
+    height:auto;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+#userPage section ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+#userPage section ul li{
+    display: flex;
+    padding: 0 20px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+    min-height: 200px;
+    border-bottom: solid 1px #0074d9;
+}
+#userPage section ul li:hover{
+    background-color: #0074d92c;
+}
+#userPage section ul button{
+    background-color: transparent;
+    border: solid 1px #0074d9;
+    border-radius: 10px;
+    color: #0074d9;
+    border: none;
+    font-weight: 700;
+    font-size: 1rem;
+    margin: 10px;
+    padding: 5px 10px;
+}
+#userPage section ul button:hover{
+    color: #ffdc00;
+    background-color: #0074d9;
+    border-radius: 10px;
+}
+.userDataForm {
+    position:absolute;
+    overflow-y: auto;
+    padding:20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    width:50vw;
+    height: 75vh;
+    border: solid 1px #0074d9;
+    border-radius: 5px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height:auto;
+    box-shadow:1px 1px 5px #000;
+}
+.userDataForm h1{
+    margin-bottom: 10px;
+}
+.userDataForm input, .userDataForm textarea{
+    width: 80%;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: solid 1px #0074d9;
+    margin-bottom: 20px;
+}
+.userDataForm div div input{
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: solid 1px #0074d9;
+    margin-bottom: 20px;
+}
+.userDataForm div div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.userDataForm div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    width: 80%;
+}
+.userDataForm div button {
+    text-decoration: none;
+    color: #0074d9;
+    font-size: 0.9rem;
+    margin: 0 3px;
+    padding: 5px 10px;
+    border: solid 1px #0074d9;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+.userDataForm div button:hover {
+    font-weight: bold;
+    color: #fff;
+    background-color: #0074d9;
+}

@@ -1,0 +1,198 @@
+<ul id="skillsList">
+    <button onclick="addSkill()">add skill</button>
+    <% if(skills && skills.length > 0) { %> <% skills.forEach(exp => { %>
+    <li id="<%= exp.id %>">
+        <h3><%= exp.skill_name %></h3>
+        <h4> level: <strong><%= exp.skill_level %></strong> </h4>
+        <div>
+            <button data-id="<%= exp.id %>" onclick="editSkill(this)">Edit</button>
+            <button data-id="<%= exp.id %>" onclick="deleteSkill(this)">Delete</button>
+        </div>
+    </li>
+    <% }) %> <% } else { %>
+    <p>No skill found.</p>
+    <% } %>
+</ul>
+<form class="userDataForm skillsForm" onsubmit="formSubmit(event)">
+    <h1>skills</h1>
+    <input type="hidden" name="user_id" value="<%= user.id %>" />
+    <label>Skill Name</label>
+    <input type="text" name="skill_name" required />
+    <div>
+        <div>
+            <label htmlFor="beginner">Beginner</label>
+            <input type="radio" id="beginner" name="skill_level" value="Beginner" required />
+        </div>
+        <div>
+            <label htmlFor="intermediate">Intermediate</label>
+            <input type="radio" id="intermediate" name="skill_level" value="Intermediate" required />
+        </div>
+        <div>
+            <label htmlFor="advanced">Advanced</label>
+            <input type="radio" id="advanced" name="skill_level" value="Advanced" required />
+        </div>
+    </div>
+    <p id="error"></p>
+    <p id="loading"></p>
+    <div>
+        <button type="button" onclick="cancelAddSkill()">Cancel</button>
+        <button type="submit" id="submitButton">Add skill</button>
+    </div>
+</form>
+
+<script>
+    function formSubmit(event) {
+        const form = document.querySelector('.skillsForm');
+        event.preventDefault();
+        const formData = new FormData(form);
+        const { user_id, skill_name, skill_level } = Object.fromEntries(formData.entries());
+        if (!user_id || !skill_name || !skill_level) {
+            document.getElementById('error').innerHTML = 'Please fill in all required fields';
+            return;
+        }
+        const startTransition = (callback) => {
+            try {
+                document.getElementById('loading').innerHTML = 'Loading...';
+                document.getElementById('submitButton').disabled = true;
+                callback();
+            } finally {
+                document.getElementById('loading').innerHTML = '';
+                document.getElementById('submitButton').disabled = false;
+            }
+        };
+
+        startTransition(async () => {
+            await fetch('/api/skills', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user_id,
+                    skill_name,
+                    skill_level,
+                }),
+            })
+                .then(async (res) => {
+                    if (res.ok) {
+                        const ul = document.getElementById('skillsList');
+                        const li = document.createElement('li');
+                        const data = await res.json();
+                        li.id = data.id;
+                        li.innerHTML = `
+                        <h3>${skill_name}</h3>
+                        <h4>level: <strong>${skill_level}</strong></h4>
+                        <div>
+                            <button data-id="${data.id}" onclick="editSkill(this)">Edit</button>
+                            <button data-id="${data.id}" onclick="deleteSkill(this)">Delete</button>
+                        </div> 
+                        `;
+                        ul.appendChild(li);
+                        form.reset();
+                        form.style.display = 'none';
+                    } else {
+                        document.getElementById('error').innerHTML = await res.text();
+                    }
+                })
+                .catch((err) => {
+                    console.error(err);
+                    document.getElementById('error').innerHTML = 'Internal server error';
+                });
+        });
+    }
+    function addSkill() {
+        const form = document.querySelector('.skillsForm');
+        form.style.display = form.style.display === 'flex' ? 'none' : 'flex';
+    }
+    function cancelAddSkill() {
+        const form = document.querySelector('.userDataForm.skillsForm');
+        form.style.display = 'none';
+    }
+    function deleteSkill(button) {
+        const id = button.getAttribute('data-id');
+        const startTransition = (callback) => {
+            try {
+                document.getElementById('loading').innerHTML = 'Loading...';
+                button.disabled = true;
+                callback();
+            } finally {
+                document.getElementById('loading').innerHTML = '';
+                button.disabled = false;
+            }
+        };
+        startTransition(async () => {
+            await fetch(`/api/skills/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).then(async (res) => {
+                if (res.ok) {
+                    document.getElementById(id).remove();
+                } else {
+                    document.getElementById('error').innerHTML = await res.text();
+                }
+            });
+        });
+    }
+
+    function editSkill(button) {
+        const id = button.getAttribute('data-id');
+        const li = document.getElementById(id);
+        const skill_name = li.querySelector('h3').innerText;
+        const skill_level = li.querySelector('h4 strong').innerText;
+        const form = document.querySelector('.skillsForm');
+        form.style.display = 'flex';
+        form.skill_name.value = skill_name;
+        form.skill_level.value = skill_level;
+
+        form.onsubmit = function (event) {
+            event.preventDefault();
+
+            const startTransition = (callback) => {
+                try {
+                    document.getElementById('loading').innerHTML = 'Loading...';
+                    button.disabled = true;
+                    callback();
+                } finally {
+                    document.getElementById('loading').innerHTML = '';
+                    button.disabled = false;
+                }
+            };
+
+            startTransition(async () => {
+                const formData = new FormData(form);
+                const { user_id, skill_name, skill_level } = Object.fromEntries(formData.entries());
+                if (!user_id || !skill_name || !skill_level) {
+                    document.getElementById('error').innerHTML = 'Please fill in all required fields';
+                    return;
+                }
+                await fetch(`/api/skills/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        user_id,
+                        skill_name,
+                        skill_level,
+                    }),
+                })
+                    .then(async (res) => {
+                        if (res.ok) {
+                            li.querySelector('h3').innerText = skill_name;
+                            li.querySelector('h4 strong').innerText = skill_level;
+                            form.reset();
+                            form.style.display = 'none';
+                        } else {
+                            document.getElementById('error').innerHTML = await res.text();
+                        }
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                        document.getElementById('error').innerHTML = 'Internal server error';
+                    });
+            });
+        };
+    }
+</script>

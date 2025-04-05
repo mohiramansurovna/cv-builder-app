@@ -18,8 +18,57 @@ const registerValidator = [
 
 const loginValidator = [
     check('email')
-    .isEmail().withMessage('Invalid email address'),
+        .isEmail().withMessage('Invalid email address'),
     check('password')
-    .isLength({ min: 8 }).withMessage('Password must be at least 8 characters long'),
+        .isLength({ min: 8 }).withMessage('Password must be at least 8 characters long'),
 ]
-module.exports = { registerValidator, loginValidator }
+
+const educationValidator = [
+    check('user_id')
+        .isUUID().withMessage('Invalid user ID'),
+    check('degree')
+        .isLength({ min: 2 }).withMessage('Degree must be at least 2 characters long'),
+    check('field_of_study')
+        .isLength({ min: 2 }).withMessage('Field of study must be at least 2 characters long'),
+    check('institution')
+        .isLength({ min: 2 }).withMessage('Institution must be at least 2 characters long'),
+    check('location')
+        .isLength({ min: 2 }).withMessage('Location must be at least 2 characters long'),
+    check('start_date')
+        .isDate().withMessage('Invalid start date'),
+    check('end_date')
+        .isDate().withMessage('Invalid end date'),
+    check('description')
+        .isLength({ max: 500 }).withMessage('Description must be less than 500 characters long'),
+]
+
+const experienceValidator = [
+    check('user_id')
+        .isUUID().withMessage('Invalid user ID'),
+    check('job_title')
+        .isLength({ min: 2 }).withMessage('Job title must be at least 2 characters long'),
+    check('company_name')
+        .isLength({ min: 2 }).withMessage('Company name must be at least 2 characters long'),
+    check('start_date')
+        .isDate().withMessage('Invalid start date'),
+    check('end_date')
+        .isDate().withMessage('Invalid end date'),
+    check('description')
+        .isLength({ max: 500 }).withMessage('Description must be less than 500 characters long'),
+]
+
+const skillsValidator = [
+    check('user_id')
+        .isUUID().withMessage('Invalid user ID'),
+    check('skill_name')
+        .isLength({ min: 2 }).withMessage('Skill name must be at least 2 characters long'),
+    check('skill_level')
+        .isIn(['Beginner', 'Intermediate', 'Advanced']).withMessage('Invalid skill level'),
+]
+module.exports = {
+    registerValidator,
+    loginValidator,
+    educationValidator,
+    experienceValidator,
+    skillsValidator
+}

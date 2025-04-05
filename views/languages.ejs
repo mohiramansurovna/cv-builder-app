@@ -1,0 +1,62 @@
+<ul>
+    <% if(languages && languages.length > 0) { %> <% languages.forEach(exp => { %>
+    <li>
+        <strong><%= exp.language_name %></strong>
+        <%= exp.proficiency_level %> 
+        <button onclick="deleteLanguage(exp.id)">Delete</button>
+    </li>
+    <% }) %> <% } else { %>
+    <p>No language found.</p>
+    <% } %>
+    <button onclick="addLanguage()">add language</button>
+</ul>
+<form class="userDataForm languageForm" action="/api/language/" method="POST">
+    <h1>Language</h1>
+    <label>Name</label>
+    <input type="text" name="language_name" required />
+    <div>
+        <div>
+            <label>Beginner</label>
+            <input type="radio" name="proficiency_level" required />
+        </div>
+        <div>
+            <label>Intermediate</label>
+            <input type="radio" name="proficiency_level" required />
+        </div>
+        <div>
+            <label>Fluent</label>
+            <input type="radio" name="proficiency_level" required />
+        </div>
+        <div>
+            <label>Native</label>
+            <input type="radio" name="proficiency_level" required />
+        </div>
+    </div>
+    <div>
+        <button type="button" onclick="cancelAddLanguage()">Cancel</button>
+        <button type="submit">Add Language</button>
+    </div>
+</form>
+<script>
+    function addLanguage() {
+        const form = document.querySelector('.languageForm');
+        form.style.display = form.style.display === 'flex' ? 'none' : 'flex';
+    }
+    function cancelAddLanguage() {
+        const form = document.querySelector('.languageForm');
+        form.style.display = 'none';
+    }
+    function deleteLanguage(id) {
+        fetch(`/api/language/${id}`, {
+            method: 'DELETE',
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success) {
+                    window.location.reload();
+                } else {
+                    alert('Error deleting language');
+                }
+            });
+    }
+</script>
