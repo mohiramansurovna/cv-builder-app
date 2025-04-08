@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%=title %></title>
+        <link rel="stylesheet" href="/css/templates/blueDragon.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet" />
+    </head>
+    <body>
+        <button id="savePdf">Download as PDF</button>
+        <main>
+            <section>
+                <h1><%= user.first_name %> <%=user.last_name %></h1>
+                <h2><%=profile.job_title %></h2>
+            </section>
+            <section>
+                <h3>Profile</h3>
+                <p><%=profile.personal_statement %></p>
+            </section>
+            <section>
+                <h3>Employment</h3>
+                <ul>
+                    <% if (experience.length === 0) { %>
+                    <li>No employment history</li>
+                    <% } else {%> <% for (let i = 0; i < experience.length; i++) { %>
+                    <li>
+                        <% %>
+                        <p>
+                            <%= (new Date(experience[i].start_date)).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) %> - <%= (new
+                            Date(experience[i].end_date)).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) %>
+                        </p>
+                        <div>
+                            <h4><%=experience[i].job_title%></h4>
+                            <p><%=experience[i].company_name%></p>
+                            <p><%=experience[i].description%></p>
+                        </div>
+                    </li>
+                    <% } %> <% } %>
+                </ul>
+            </section>
+            <section>
+                <h3>Education</h3>
+                <ul>
+                    <% if (education.length === 0) { %>
+                    <li>No education history</li>
+                    <% } else {%> <% for (let i = 0; i < education.length; i++) { %>
+                    <li>
+                        <p>
+                            <%= (new Date(experience[i].start_date)).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) %> - <%= (new
+                            Date(experience[i].end_date)).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) %>
+                        </p>
+                        <div>
+                            <h4><%=education[i].degree%> - <%=education[i].field_of_study%></h4>
+                            <p><%=education[i].location%></p>
+                            <p><%=education[i].institution_name%></p>
+                            <p><%=education[i].description%></p>
+                        </div>
+                    </li>
+                    <% } %> <% } %>
+                </ul>
+            </section>
+        </main>
+        <div>
+            <section>
+                <h3>Personal details</h3>
+                <p><i class="fa-solid fa-envelope"></i> <%=user.email%></p>
+                <p><i class="fa-solid fa-phone"></i> <%=user.phone%></p>
+                <p><i class="fa-solid fa-location-dot"></i> <%=user.address%></p>
+                <% if (profile.linkedin) { %>
+                <p><i class="fa-brands fa-linkedin"></i> <a href="<%=profile.linkedin%>" target="_blank"><%=profile.linkedin%></a></p>
+                <% } %> <% if (profile.github) { %>
+                <p><i class="fa-brands fa-github"></i> <a href="<%=profile.github%>" target="_blank"><%=profile.github%></a></p>
+                <% } %> <% if (profile.portfolio) { %>
+                <p><i class="fa-solid fa-briefcase"></i> <a href="<%=profile.portfolio%>" target="_blank"><%=profile.portfolio%></a></p>
+                <% } %>
+            </section>
+            <section>
+                <h3>Skills</h3>
+                <ul>
+                    <% if (skills.length === 0) { %>
+                    <li>No skills listed</li>
+                    <% } else {%> <% for (let i = 0; i < skills.length; i++) { %>
+                    <li
+                        ><%=skills[i].skill_name%> <% if(skills[i].skill_level=='Beginner'){ %>
+                        <div>
+                            <i class="fa-solid fa-circle"></i>
+                            <i class="fa-regular fa-circle"></i>
+                            <i class="fa-regular fa-circle"></i>
+                        </div>
+                        <% } else if(skills[i].skill_level=='Intermediate'){ %>
+                        <div>
+                            <i class="fa-solid fa-circle"></i>
+                            <i class="fa-solid fa-circle"></i>
+                            <i class="fa-regular fa-circle"></i>
+                        </div>
+                        <% }else if(skills[i].skill_level=='Advanced'){ %>
+                        <div>
+                            <i class="fa-solid fa-circle"></i>
+                            <i class="fa-solid fa-circle"></i>
+                            <i class="fa-solid fa-circle"></i>
+                        </div>
+                        <% } %>
+                    </li>
+                    <% } %> <% } %>
+                </ul>
+            </section>
+            <section>
+                <h3>Languages</h3>
+                <ul>
+                    <% if (language.length === 0) { %>
+                    <li>No language listed</li>
+                    <% } else {%> <% for (let i = 0; i < language.length; i++) { %>
+                    <li>
+                        <p><%=language[i].language_name%></p>
+                        <% if(language[i].language_level=='Beginner'){ %>
+                        <div>
+                            <i class="fa-solid fa-circle"></i>
+                            <i class="fa-regular fa-circle"></i>
+                            <i class="fa-regular fa-circle"></i>
+                            <i class="fa-regular fa-circle"></i>
+                        </div>
+                        <% } else if(language[i].language_level=='Intermediate'){ %>
+                        <div>
+                            <i class="fa-solid fa-circle"></i>
+                            <i class="fa-solid fa-circle"></i>
+                            <i class="fa-regular fa-circle"></i>
+                            <i class="fa-regular fa-circle"></i>
+                        </div>
+                        <% }else if(language[i].language_level=='Fluent'){ %>
+                        <div>
+                            <i class="fa-solid fa-circle"></i>
+                            <i class="fa-solid fa-circle"></i>
+                            <i class="fa-solid fa-circle"></i>
+                            <i class="fa-regular fa-circle"></i>
+                        </div>
+                        <% }else if(language[i].language_level=='Native'){ %>
+                        <div>
+                            <i class="fa-solid fa-circle"></i>
+                            <i class="fa-solid fa-circle"></i>
+                            <i class="fa-solid fa-circle"></i>
+                            <i class="fa-solid fa-circle"></i>
+                        </div>
+                        <% } %>
+                    </li>
+                    <% } %> <% } %>
+                </ul>
+            </section>
+        </div>
+    </body>
+</html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+    document.getElementById('savePdf').addEventListener('click', async () => {
+        await document.fonts.ready;
+        const button = document.getElementById('savePdf');
+        button.style.display = 'none';
+        document.body.style.backgroundColor = 'white';
+        document.body.style.color = 'black';
+        const element = document.querySelector('body');
+        html2pdf()
+            .set({
+                margin: 0,
+                filename: 'resume.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
+            })
+            .from(element)
+            .save();
+        setTimeout(() => {
+            button.style.display = 'block';
+        }, 0);
+    });
+</script>

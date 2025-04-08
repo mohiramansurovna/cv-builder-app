@@ -1,0 +1,47 @@
+<ul id="languageList">
+    <button onclick="addLanguage()">add language</button>
+    <% if(language && language.length > 0) { %> <% language.forEach(exp => { %>
+    <li id="<%= exp.id %>">
+        <h3><%= exp.language_name %></h3>
+        <h4> level: <strong><%= exp.language_level %></strong> </h4>
+        <div>
+            <button data-id="<%= exp.id %>" onclick="editLanguage(this)">Edit</button>
+            <button data-id="<%= exp.id %>" onclick="deleteLanguage(this)">Delete</button>
+        </div>
+    </li>
+    <% }) %> <% } else { %>
+    <p id="notFound">No language found.</p>
+    <% } %>
+</ul>
+<form class="userDataForm languageForm" onsubmit="languagesFormSubmit(event)">
+    <h1>Language</h1>
+    <input type="hidden" name="user_id" value="<%=user.id %>" />
+    <label>Language Name</label>
+    <input type="text" name="language_name" required />
+    <div>
+        <div>
+            <label htmlFor="beginner">Beginner</label>
+            <input type="radio" id="beginner" name="language_level" value="Beginner" required />
+        </div>
+        <div>
+            <label htmlFor="intermediate">Intermediate</label>
+            <input type="radio" id="intermediate" name="language_level" value="Intermediate" required />
+        </div>
+        <div>
+            <label htmlFor="fluent">Fluent</label>
+            <input type="radio" id="fluent" name="language_level" value="Fluent" required />
+        </div>
+        <div>
+            <label htmlFor="native">Native</label>
+            <input type="radio" id="native" name="language_level" value="Native" required />
+        </div>
+    </div>
+    <p id="errorLanguage"></p>
+    <p id="loadingLanguage"></p>
+    <div>
+        <button type="button" onclick="cancelAddLanguage()">Cancel</button>
+        <button type="submit" id="submitButtonLanguage">Add Language</button>
+    </div>
+</form>
+
+<script src="/js/user/languages.js"></script>

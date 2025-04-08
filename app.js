@@ -3,7 +3,7 @@ const express=require('express');
 const app=express();
 const PORT=3000;
 const path=require('path');
-const routes=require('./routes/index');
+const router=require('./routes/');
 const cookieParser=require('cookie-parser');
 const expressLayout=require('express-ejs-layouts');
 //using json in body of the requests
@@ -18,7 +18,7 @@ app.use('/js', express.static('public/js'));
 app.use('/images',express.static('public/assets'));
 
 
-app.use('/', routes);
+app.use('/', router);
 
 app.listen(PORT,()=>{
     console.log(`App is listening on http://localhost:${PORT}`);

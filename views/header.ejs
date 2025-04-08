@@ -1,18 +1,21 @@
 <header>
     <!-- <section> -->
-        <img src="/images/logo.png" alt="Logo" id="logo" />
+        <img src="/images/logo1.png" alt="Logo" id="logo" />
 
         <% if (user) { %>
         <nav>
             <a href="/create-resume">Create Resume</a>
-            <a href="/settings">Settings</a>
-            <a href="/help">Help</a>
-            <a href="/logout">Log Out</a>
+            <% if(settings){ %>
+                <a href="/user/">Dashboard</a>
+            <%}else{ %>
+                <a href="/user/settings">Settings</a>
+            <% } %>
+            <a href="/auth/logout">Log Out</a>
         </nav>
         <% } else { %>
         <nav>
-            <a href="/user/register">Register</a>
-            <a href="/user/login">Log in</a>
+            <a href="/auth/register">Register</a>
+            <a href="/auth/login">Log in</a>
         </nav>
         <% } %>
     <!-- </section> -->

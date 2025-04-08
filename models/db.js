@@ -2,8 +2,8 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('database.db');
 
 db.serialize(() => {
-    //USER TABLE
-    db.run(`CREATE TABLE IF NOT EXISTS users (
+  //USER TABLE
+  db.run(`CREATE TABLE IF NOT EXISTS users (
   id TEXT PRIMARY KEY UNIQUE,
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
@@ -14,8 +14,20 @@ db.serialize(() => {
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 `);
-    //EXPERIENCE TABLE
-    db.run(`CREATE TABLE IF NOT EXISTS experiences (
+  //PROFILE TABLE
+  db.run(`CREATE TABLE IF NOT EXISTS profile (
+  id TEXT PRIMARY KEY UNIQUE,
+  user_id TEXT NOT NULL,
+  job_title TEXT NOT NULL,
+  personal_statement TEXT,
+  linkedin TEXT OPTIONAL,
+  github TEXT OPTIONAL,
+  portfolio TEXT OPTIONAL,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+`)
+  //EXPERIENCE TABLE
+  db.run(`CREATE TABLE IF NOT EXISTS experiences (
   id TEXT PRIMARY KEY UNIQUE,
   user_id INTEGER NOT NULL,
   job_title TEXT NOT NULL,
@@ -26,8 +38,8 @@ db.serialize(() => {
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 `)
-    //SKILLS TABLE
-    db.run(`CREATE TABLE IF NOT EXISTS skills (
+  //SKILLS TABLE
+  db.run(`CREATE TABLE IF NOT EXISTS skills (
   id TEXT PRIMARY KEY UNIQUE,
   user_id INTEGER NOT NULL,
   skill_name TEXT NOT NULL,
@@ -35,8 +47,8 @@ db.serialize(() => {
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 `)
-    //EDUCATION TABLE
-    db.run(`CREATE TABLE IF NOT EXISTS education (
+  //EDUCATION TABLE
+  db.run(`CREATE TABLE IF NOT EXISTS education (
   id TEXT PRIMARY KEY UNIQUE,
   user_id INTEGER NOT NULL,
   degree TEXT NOT NULL,
@@ -49,12 +61,12 @@ db.serialize(() => {
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 `)
-    //LANGUAGES TABLE
-    db.run(`CREATE TABLE IF NOT EXISTS languages (
+  //LANGUAGES TABLE
+  db.run(`CREATE TABLE IF NOT EXISTS languages (
   id TEXT PRIMARY KEY UNIQUE,
   user_id INTEGER NOT NULL,
   language_name TEXT NOT NULL,
-  proficiency_level TEXT, -- E.g., Native, Fluent, Beginner
+  language_level TEXT,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 `)

@@ -1,0 +1,56 @@
+<ul id="profileList">
+    <% if(profile) { %> 
+    <li id="<%= profile.id %>">
+        <h3> <%= profile.job_title %> </h3>
+        <h4>
+            <strong>Personal Statement</strong> <br />
+            <i><%= profile.personal_statement %></i>
+        </h4>
+        <% if(profile.linkedin){ %>
+        <h4 id="linkedin">
+            <strong>LinkedIn</strong> <br />
+            <a href="<%= profile.linkedin %>" target="_blank"><%= profile.linkedin %></a>
+        </h4>
+        <% } %> <%if(profile.github){ %>
+        <h4 id="github">
+            <strong>GitHub</strong> <br />
+            <a href="<%= profile.github %>" target="_blank"><%= profile.github %></a>
+        </h4>
+        <% } %> <% if(profile.portfolio){ %>
+        <h4 id="portfolio">
+            <strong>Portfolio</strong> <br />
+            <a href="<%= profile.portfolio %>" target="_blank"><%= profile.portfolio %></a>
+        </h4>
+        <% } %>
+        <div>
+            <button data-id="<%= profile.id %>" onclick="editProfile(this)">Edit</button>
+            <button data-id="<%= profile.id %>" onclick="deleteProfile(this)">Delete</button>
+        </div>
+    </li>
+    <% } else { %>
+    <button id="addButton" onclick="addProfile()">add profile</button>
+    <p id="notFound">No profile found.</p>
+    <% } %>
+</ul>
+<form class="userDataForm profileForm" onsubmit="profileFormSubmit(event)">
+    <h1>Profile</h1>
+    <input type="hidden" name="user_id" value="<%= user.id %>" />
+    <label>Job Title *</label>
+    <input type="text" name="job_title" required />
+    <label>Personal Statement *</label>
+    <textarea rows="3" name="personal_statement"></textarea>
+    <label>LinkedIn</label>
+    <input type="url" name="linkedin" />
+    <label>GitHub</label>
+    <input type="url" name="github" />
+    <label>Portfolio</label>
+    <input type="url" name="portfolio" />
+    <p id="error"></p>
+    <p id="loading"></p>
+    <div>
+        <button type="button" onclick="cancelAddProfile()">Cancel</button>
+        <button type="submit" id="submitButton">Add profile</button>
+    </div>
+</form>
+
+<script src="/js/user/profile.js"></script>

@@ -1,0 +1,27 @@
+<% if(user) { %>
+<form id="settingsForm" onsubmit="settingsFormSubmit(event)">
+    <h1>Settings</h1>
+    <input type="hidden" name="id" value="<%=user.id %>" />
+    <label>First Name *</label>
+    <input type="text" name="first_name" value="<%=user.first_name %>" required />
+    <label>Job Title *</label>
+    <input type="text" name="last_name" required />
+    <label>Email *</label>
+    <input rows="3" name="email"></input>
+    <label>Password</label>
+    <input type="password" name="password" />
+    <label>New Password</label>
+    <input type="password" name="new_password" />
+    <label>Confirm New Password</label>
+    <input type="password" name="confirm_password" />
+    <p id="error"></p>
+    <p id="loading"></p>
+    <div>
+        <button type="submit" id="submitButton">Save</button>
+    </div>
+</form>
+<% } else {%> 
+    <p>Nav</p>
+    <% } %>
+
+<script src="/js/user/settings.js"></script>

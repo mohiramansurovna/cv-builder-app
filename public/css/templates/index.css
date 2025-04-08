@@ -1,0 +1,39 @@
+#templateIndex{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    min-height: 85vh;
+}
+#templateIndex h1{
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+#templateIndex div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+#templateIndex a{
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    transition: transform 0.2s;
+}
+#templateIndex a:hover{
+    transform: scale(1.05);
+}
+#templateIndex img{
+    width: 200px;
+    height: 200px;
+    border-radius: 8px;
+}
+#templateIndex p{
+    margin-top: 10px;
+    font-size: 1em;
+}

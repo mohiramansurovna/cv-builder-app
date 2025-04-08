@@ -7,7 +7,7 @@ header{
     width:100%;
     min-height: 60px;
     max-height:100px;
-    background-color: #0074d9;
+    background-color: #ec82b0;
     text-align: center;
     font-size:12px;
 }
@@ -22,7 +22,7 @@ header nav{
 }
 header nav a{
     text-decoration: none;
-    color: #ffdc00;
+    color: #fbfbfc;
     font-size: 15px;
     margin:0 3px;
     padding: 5px 10px;
@@ -31,14 +31,14 @@ header nav a{
 
 }
 header nav a:first-child{
-    background-color: #ffdc00;
-    color: #0074d9;
+    background-color: #6acdfb;
+    color: #fefeff;
     font-weight: bold;
 }
 header nav a:first-child:hover{
-    background-color: #0074d9;
-    color: #ffdc00;
-    border: solid 1px #ffdc00;
+    background-color: #53b7e6;
+    color: #ffffff;
+    border: solid 1px #8d8d8c;
 }
 header nav a:last-child{
     font-weight: bold;

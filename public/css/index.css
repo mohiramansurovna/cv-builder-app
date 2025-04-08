@@ -28,47 +28,52 @@ body {
     top: 70px;
     width: 100%;
     height: 85vh;
-    filter: saturate(0.1);
+   
 }
 #index-main section {
-    width: 50%;
+    width: 53%;
     height: 85vh;
     border: solid 1px transparent;
     border-radius: 0 999px 999px 0;
     position: relative;
-    background-color: #ffdc00;
+    background-color: rgba(187, 191, 204, 0.85);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     padding-left: 100px;
+    
 }
 #index-main section h1 {
-    font-size: 2.5rem;
-    color: #0074d9;
+    font-size: 3.4rem;
+    color: #ffffff;
     font-weight: bold;
+    font-family: 'Pacifico', cursive;
 }
 #index-main section p {
-    font-size: 1rem;
+    font-size: 1.1rem;
     margin-top: 15px;
     margin-bottom: 25px;
+    color: #5b5a5a;
+    font-weight: bold;
+    
 }
 #index-main section a {
     text-decoration: none;
     font-weight: bold;
-    color: #ffdc00;
+    color: #ffff;
     font-size: 1rem;
     margin: 0 3px;
     padding: 10px 15px;
     border-radius: 10px;
-    background-color: #0074d9;
+    background-color: 
+    #6acdfb;
     transition: all 0.3s ease;
 }
 #index-main section a:hover {
     font-weight: bold;
-    color: #0074d9;
-    background-color: #ffdc00;
-    border: solid 1px #0074d9;
+    color: #ffffff;
+    background-color: #53b7e6;
 }
 #registerFormImage {
     position: absolute;
@@ -110,15 +115,16 @@ form section {
 }
 form section h1 {
     font-size: 2rem;
-    color: #0074d9;
+    color: #777275;
     font-weight: bold;
     margin-bottom: 20px;
+    font-family: 'Pacifico', cursive;
 }
 form section input {
     width: 80%;
     padding: 10px 20px;
     border-radius: 10px;
-    border: solid 1px #0074d9;
+    border: solid 1.5px #88878d;
     margin-bottom: 20px;
 }
 form section div {
@@ -131,20 +137,21 @@ form section div {
 form section div a,
 form section div button {
     text-decoration: none;
-    color: #0074d9;
+    color: #ffffff;
     font-size: 0.9rem;
     margin: 0 3px;
     padding: 5px 10px;
-    border: solid 1px #0074d9;
+    border: solid 1px #6acdfb;
     border-radius: 10px;
     transition: all 0.3s ease;
     font-weight: bold;
+    background-color: #6acdfb;
 }
 form section div a:hover,
 form section div button:hover {
     font-weight: bold;
-    color: #fff;
-    background-color: #0074d9;
+    color: #F9FAFB;
+    background-color: #53b7e6;
 }
 form section div button {
     padding: 5px 15px;

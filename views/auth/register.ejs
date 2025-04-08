@@ -1,0 +1,33 @@
+<!-- I would have used form actions here but i wanted more control so i used js -->
+<img id="registerFormImage" class="loading" src="https://i.pinimg.com/originals/27/81/92/278192d52fb085d8a51db3c7779c39ed.jpg"/>
+<form id="registerForm">
+    <section>
+        <h1>Register</h1>
+        <label>First name</label>
+        <input type="text" name="first_name" required />
+        <label>Last name</label>
+        <input type="text" name="last_name" required />
+        <label>Email</label>
+        <input type="email" name="email" required />
+        <label>Password</label>
+        <input type="password" name="password" required />
+        <p id="error1"></p>
+        <div>
+            <a href="/">Cancel</a>
+            <button type="button" onclick="handleNext()">Next</button>
+        </div>
+    </section>
+    <section>
+        <h1>Your personal data</h1>
+        <label>Phone number</label>
+        <input type="tel" name="phone" required />
+        <label>Address</label>
+        <input type="text" name="address" required />
+        <p id="error"></p>
+        <div>
+            <button type="button" onclick="handleBack()">Back</button>
+            <button type="button" onclick="handleRegister()" id="registerButton">Register</button>
+        </div>
+    </section>
+</form>
+<script src="/js/auth/register.js"></script>

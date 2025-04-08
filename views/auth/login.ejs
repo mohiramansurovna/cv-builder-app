@@ -1,0 +1,21 @@
+<!-- I would have used form actions here but i wanted more control so i used js -->
+<form id="loginForm">
+    <section>
+        <!-- I just created this section to not rewrite styles -->
+    </section>
+    <img id="loginFormImage" class="loading" src="https://i.pinimg.com/736x/41/31/89/413189f79b7f45d497880ecd57786117.jpg"/>
+    <section>
+        <h1>Login</h1>
+        <label>Email</label>
+        <input type="email" name="email" required />
+        <label>Password</label>
+        <input type="password" name="password" required />
+        <p id="error"></p>
+        <div>
+            <a href="/">Cancel</a>
+            <button type="button" onclick="handleLogin()">Login</button>
+        </div>
+        <div class="loading">Loading</div>
+    </section>
+</form>
+<script src="/js/auth/login.js"></script>

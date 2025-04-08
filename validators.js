@@ -23,6 +23,21 @@ const loginValidator = [
         .isLength({ min: 8 }).withMessage('Password must be at least 8 characters long'),
 ]
 
+const profileValidator = [
+    check('user_id')
+        .isUUID().withMessage('Invalid user ID'),
+    check('job_title')
+        .isLength({ min: 2 }).withMessage('Job title must be at least 2 characters long'),
+    check('personal_statement')
+        .isLength({ max: 50 }).withMessage('Personal statement must be less than 50 characters long'),
+    check('linkedin')
+        .optional().isURL().withMessage('Invalid LinkedIn URL'),
+    check('github')
+        .optional().isURL().withMessage('Invalid GitHub URL'),
+    check('portfolio')
+        .optional().isURL().withMessage('Invalid portfolio URL'),
+]
+
 const educationValidator = [
     check('user_id')
         .isUUID().withMessage('Invalid user ID'),
@@ -65,10 +80,43 @@ const skillsValidator = [
     check('skill_level')
         .isIn(['Beginner', 'Intermediate', 'Advanced']).withMessage('Invalid skill level'),
 ]
+const languageValidator = [
+    check('user_id')
+        .isUUID().withMessage('Invalid user ID'),
+    check('language_name')
+        .isLength({ min: 2 }).withMessage('Language name must be at least 2 characters long'),
+    check('proficiency_level')
+        .isIn(['Native', 'Fluent', 'Intermediate', 'Beginner']).withMessage('Invalid proficiency level'),
+]
+
+const settingsValidator=[
+    check('first_name')
+        .isLength({ min: 3 }).withMessage('First name must be at least 3 characters long'),
+    check('last_name')
+        .isLength({min:3}).withMessage('Last name must be at least 3 characters long '),
+    check('email')
+        .isEmail().withMessage("Email is not valid"),
+    check('password')
+        .isLength({min:6}).withMessage('Password must be at least 6 characters long'),
+    check('new_password')
+        .isLength({min:6}).withMessage('New password must be at least 6 characters long'),
+    check('confirm_password')
+        .isLength({min:6}).withMessage('Confirm password must be at least 6 characters long'),
+    check('new_password')
+        .custom((value, { req }) => {
+            if (value !== req.body.confirm_password) {
+                throw new Error('New password and confirm password do not match');
+            }
+            return true;
+        }),
+]
 module.exports = {
     registerValidator,
     loginValidator,
+    profileValidator,
     educationValidator,
     experienceValidator,
-    skillsValidator
+    skillsValidator,
+    languageValidator,
+    settingsValidator
 }

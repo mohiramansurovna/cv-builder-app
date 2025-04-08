@@ -1,0 +1,51 @@
+<ul id="educationList">
+    <button onclick="addEducation()">add education</button>
+    <% if(education && education.length > 0) { %> <% education.forEach(exp => { %>
+    <li id="<%= exp.id %>">
+        <h3> <%= exp.degree %> </h3>
+        <h4> in <strong><%= exp.field_of_study %></strong> </h4>
+        <p>in <span> <%= exp.location %> </span> </p>
+        <p> from <strong><%= exp.institution %></strong> </p>
+        <p><span> <%= exp.start_date %></span> to <span><%= exp.end_date %></span></p>
+        <p><%= exp.description %></p>
+        <div>
+            <button data-id="<%= exp.id %>" onclick="editEducation(this)">Edit</button>
+            <button data-id="<%= exp.id %>" onclick="deleteEducation(this)">Delete</button>
+        </div>
+    </li>
+    <% }) %> <% } else { %>
+    <p id="notFound">No education found.</p>
+    <% } %>
+</ul>
+<form class="userDataForm educationForm" onsubmit="educationFormSubmit(event)">
+    <h1>Education</h1>
+    <input type="hidden" name="user_id" value="<%= user.id %>" />
+    <label>Degree</label>
+    <input type="text" name="degree" required />
+    <label>Field of Study</label>
+    <input type="text" name="field_of_study" required />
+    <label>Institution</label>
+    <input type="text" name="institution" required />
+    <label>Location</label>
+    <input type="text" name="location" required />
+    <div>
+        <div>
+            <label>Start Date</label>
+            <input type="date" name="start_date" required />
+        </div>
+        <div>
+            <label>End Date</label>
+            <input type="date" name="end_date" required />
+        </div>
+    </div>
+    <label>Description</label>
+    <textarea rows="3" name="description"></textarea>
+    <p id="errorEducation" class="error"></p>
+    <p id="loadingEducation" class="loading"></p>
+    <div>
+        <button type="button" onclick="cancelAddEducation()">Cancel</button>
+        <button type="submit" id="submitButtonEducation">Add Education</button>
+    </div>
+</form>
+
+<script src="/js/user/education.js"></script>

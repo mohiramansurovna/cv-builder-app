@@ -1,0 +1,16 @@
+<main id="userPage">
+    <nav>
+        <button onclick="setCurrent('profile')">Profile</button>
+        <button onclick="setCurrent('experience')">Experience</button>
+        <button onclick="setCurrent('education')">Education</button>
+        <button onclick="setCurrent('skills')">Skills</button>
+        <button onclick="setCurrent('languages')">Languages</button>
+    </nav>
+    <section id="profileSection"><%- include('profile') %></section>
+    <section id="experienceSection" style="display:none;"><%- include('experience') %></section>
+    <section id="educationSection" style="display:none;"><%- include('education') %></section>
+    <section id="skillsSection" style="display:none;"><%- include('skills') %></section>
+    <section id="languagesSection" style="display:none;"><%- include('languages') %></section>
+</main>
+
+<script src="/js/user/index.js"></script>

@@ -1,0 +1,45 @@
+<ul id="experiencesList">
+    <button onclick="addExperience()">add experience</button>
+    <% if(experience && experience.length > 0) { %> <% experience.forEach(exp => { %>
+    <li id="<%= exp.id %>">
+        <h3> <%= exp.job_title %> </h3>
+        <h4> at <strong><%= exp.company_name %></strong> </h4>
+        <p><span> <%= exp.start_date %></span> to <span><%= exp.end_date %></span></p>
+        <p><%= exp.description %></p>
+        <div>
+            <button data-id="<%= exp.id %>" onclick="editExperience(this)">Edit</button>
+            <button data-id="<%= exp.id %>" onclick="deleteExperience(this)">Delete</button>
+        </div>
+    </li>
+    <% }) %> <% } else { %>
+    <p id="notFound">No experience found.</p>
+    <% } %>
+</ul>
+<form class="userDataForm experiencesForm" onsubmit="experienceFormSubmit(event)">
+    <h1>Experience</h1>
+    <input type="hidden" name="user_id" value="<%= user.id %>" />
+    <label>Job Title</label>
+    <input type="text" name="job_title" required />
+    <label>Company Name</label>
+    <input type="text" name="company_name" required />
+    <div>
+        <div>
+            <label>Start Date</label>
+            <input type="date" name="start_date" required />
+        </div>
+        <div>
+            <label>End Date</label>
+            <input type="date" name="end_date" required />
+        </div>
+    </div>
+    <label>Description</label>
+    <textarea rows="3" name="description"></textarea>
+    <p id="errorExperience" class="error"></p>
+    <p id="loadingExperience" class="loading"></p>
+    <div>
+        <button type="button" onclick="cancelAddExperience()">Cancel</button>
+        <button type="submit" id="submitButtonExperience">Add experience</button>
+    </div>
+</form>
+
+<script src="/js/user/experience.js"></script>

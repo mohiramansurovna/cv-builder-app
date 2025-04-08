@@ -1,0 +1,250 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Nunito Sans', sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100,
+    "YTLC" 500;
+}
+html{
+    height: 100%;
+    background-color: #c5c4c4;
+}
+
+#savePdf{
+    position: absolute;
+    top:20px;
+    right:20px;
+    background-color: #4F46E5;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+#savePdf:hover{
+    background-color: #3b82f6;
+    cursor: pointer;
+}
+body{
+    display: grid;
+    grid-template-columns: 4.9in 3.4in;
+    grid-template-rows:12.65in;
+    width: 8.27in;
+    height: 12.68in;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+body>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100%;
+    padding: 20px;
+    padding-top:0;
+    border-left:solid 2px #0e0f52;
+    border-top:solid 50px #0e0f52;
+}
+
+body>div section{
+    width: 100%;
+    margin:30px 0;
+}
+body>div section:first-child h1{
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-align: center;
+    color:#0e0f52;
+
+}
+body>div section:first-child h2{
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-align: center;
+    margin:10px 0;
+}
+
+body>div section:nth-child(1){
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 250px;
+}
+body>div section:nth-child(2) h3, 
+body>div section:nth-child(3) h3,
+body>div section:nth-child(1) h3{
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align:start;
+    margin:10px 0;
+    width: 100%;
+    color:#0e0f52;
+}
+body>div section:nth-child(2) h3::after,
+body>div section:nth-child(3) h3::after,
+body>div section:nth-child(1) h3::after{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #0e0f5263;
+    margin: 10px 0;
+}
+body>div section:nth-child(1) p{
+    font-size: 1.2rem;
+    width: 100%;
+    margin:5px;
+}
+body>div section:nth-child(1) p a{
+    font-weight: 300;
+    text-decoration: none;
+    color: #000;
+    font-size: 1rem;
+}
+body>div section:nth-child(1) p a:hover{
+    text-decoration: underline;
+}
+body>div section:nth-child(1) p i{
+    font-size: 1rem;
+    color: #0e0f52;
+    margin: 3px;
+}
+
+body>div section:nth-child(2) ul,
+body>div section:nth-child(3) ul{
+    list-style: none;
+    font-size: 1rem;
+    font-weight: 300;
+    width: 100%;
+    height: 100%;
+}
+
+body>div section:nth-child(2) ul li,
+body>div section:nth-child(3) ul li{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    height: 20px;
+    width: 100%;
+    margin: 10px 0;
+    gap:10px;
+}
+
+body>div section:nth-child(2) ul i,
+body>div section:nth-child(3) ul i{
+    font-size:.5rem;
+    color:#0e0f52;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100%;
+    padding: 20px;
+    padding-top:0;
+    border-top:solid 50px #0e0f52;
+}
+main section {
+ 
+    width: 100%;
+}
+main section:nth-child(2){
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    text-wrap: wrap;
+    width: 100%;
+    min-height: 250px;
+}
+main section:nth-child(1) h2{
+    font-size: 1.7rem;
+    font-weight: 700;
+    color:#0e0f52;
+    margin:10px 0;
+}
+
+
+main section:nth-child(2) p{
+    font-size: 1rem;
+    width: 100%;
+    overflow-wrap: break-word;
+}
+main section:nth-child(1) h3,
+main section:nth-child(2) h3,
+main section:nth-child(3) h3,
+main section:nth-child(4) h3{
+    font-size: 1.3rem;
+    font-weight: 800;
+    text-align: start;
+    width: 100%;
+}
+main section:nth-child(1) h3::after,
+main section:nth-child(2) h3::after,
+main section:nth-child(3) h3::after,
+main section:nth-child(4) h3::after{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #afafaf63;
+    margin: 10px 0;
+}
+
+main section:nth-child(3) ul,
+main section:nth-child(4) ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    list-style: none;
+}
+
+main section:nth-child(3) ul li,
+main section:nth-child(4) ul li{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr;
+    min-height: 200px;
+    width: 100%;
+    margin: 10px 0;
+    gap:10px;
+}
+main section:nth-child(3) ul li>p,
+main section:nth-child(4) ul li>p{
+    font-size: .65rem;
+    width: 100%;
+    height: 100%;
+    color:#0e0f52;
+    overflow-wrap: break-word;
+}
+main section:nth-child(3) ul li div p:nth-child(2),
+main section:nth-child(4) ul li div p:nth-child(2){
+    font-size: .8rem;
+    font-weight: 400;
+    color:#0e0f52;
+}
+
+@media print{
+    body{
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        box-shadow: none;
+        color: #000;
+    }
+    #savePdf{
+        display: none;
+    }
+}

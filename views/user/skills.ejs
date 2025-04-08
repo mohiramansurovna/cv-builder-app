@@ -1,0 +1,43 @@
+<ul id="skillsList">
+    <button onclick="addSkill()">add skill</button>
+    <% if(skills && skills.length > 0) { %> <% skills.forEach(exp => { %>
+    <li id="<%= exp.id %>">
+        <h3><%= exp.skill_name %></h3>
+        <h4> level: <strong><%= exp.skill_level %></strong> </h4>
+        <div>
+            <button data-id="<%= exp.id %>" onclick="editSkill(this)">Edit</button>
+            <button data-id="<%= exp.id %>" onclick="deleteSkill(this)">Delete</button>
+        </div>
+    </li>
+    <% }) %> <% } else { %>
+    <p id="notFound">No skill found.</p>
+    <% } %>
+</ul>
+<form class="userDataForm skillsForm" onsubmit="skillsFormSubmit(event)">
+    <h1>skills</h1>
+    <input type="hidden" name="user_id" value="<%=user.id %>" />
+    <label>Skill Name</label>
+    <input type="text" name="skill_name" required />
+    <div>
+        <div>
+            <label htmlFor="beginner">Beginner</label>
+            <input type="radio" id="beginner" name="skill_level" value="Beginner" required />
+        </div>
+        <div>
+            <label htmlFor="intermediate">Intermediate</label>
+            <input type="radio" id="intermediate" name="skill_level" value="Intermediate" required />
+        </div>
+        <div>
+            <label htmlFor="advanced">Advanced</label>
+            <input type="radio" id="advanced" name="skill_level" value="Advanced" required />
+        </div>
+    </div>
+    <p id="errorSkills" class="error"></p>
+    <p id="loadingSkills" class="loading"></p>
+    <div>
+        <button type="button" onclick="cancelAddSkill()">Cancel</button>
+        <button type="submit"  id="submitButtonSkills">Add skill</button>
+    </div>
+</form>
+
+<script src="/js/user/skills.js"></script>

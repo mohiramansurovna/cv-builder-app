@@ -11,12 +11,12 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    border-bottom:solid 1px #0074d9;
+    border-bottom:solid 1px #ec82b0;
     height: auto;
 }
 #userPage nav button{
     border: none;
-    color: #0074d9;
+    color: #777275;
     background-color: transparent;
     font-weight: 700;
     font-size: 1.2rem;
@@ -25,10 +25,10 @@
     cursor: pointer;
 }
 #userPage nav button:hover{
-    color: #ffdc00;
+    color: #413f41;
 }
 #userPage nav button.active{
-    color: #ffdc00;
+    color: #413f41;
     text-decoration: underline;
 }
 #userPage section{
@@ -56,17 +56,19 @@
     align-items: flex-start;
     flex-direction: column;
     width: 100%;
-    min-height: 200px;
-    border-bottom: solid 1px #0074d9;
+    min-height: 150px;
+    margin:20px 0;
+    gap:5px;
+    border-bottom: solid 1px #ec82b0;
 }
 #userPage section ul li:hover{
-    background-color: #0074d92c;
+    background-color: #4F46E52c;
 }
 #userPage section ul button{
     background-color: transparent;
-    border: solid 1px #0074d9;
+    border: solid 1px #6acdfb;
     border-radius: 10px;
-    color: #0074d9;
+    color: #6acdfb;
     border: none;
     font-weight: 700;
     font-size: 1rem;
@@ -74,8 +76,8 @@
     padding: 5px 10px;
 }
 #userPage section ul button:hover{
-    color: #ffdc00;
-    background-color: #0074d9;
+    color: #ffffff;
+    background-color: #6acdfb;
     border-radius: 10px;
 }
 .userDataForm {
@@ -85,33 +87,36 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #fff;
+    background-color: #F9FAFB;
     width:50vw;
-    height: 75vh;
-    border: solid 1px #0074d9;
+    min-height: 75vh;
+    max-height: 99vh;
+    border: solid 1px #615f60;
     border-radius: 5px;
     display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height:auto;
-    box-shadow:1px 1px 5px #000;
+    box-shadow:1px 1px 5px #000000;
 }
 .userDataForm h1{
     margin-bottom: 10px;
+    color: #5d5a5c;
+    font-family: 'Pacifico', cursive;
 }
 .userDataForm input, .userDataForm textarea{
     width: 80%;
     padding: 10px 20px;
     border-radius: 10px;
-    border: solid 1px #0074d9;
+    border: solid 1px #ec82b0;
     margin-bottom: 20px;
 }
 .userDataForm div div input{
     width: 100%;
     padding: 10px 20px;
     border-radius: 10px;
-    border: solid 1px #0074d9;
+    border: solid 1px #ec82b0;
     margin-bottom: 20px;
 }
 .userDataForm div div{
@@ -130,17 +135,73 @@
 }
 .userDataForm div button {
     text-decoration: none;
-    color: #0074d9;
+    color: #ffffff;
+    background-color: #6acdfb;
     font-size: 0.9rem;
     margin: 0 3px;
     padding: 5px 10px;
-    border: solid 1px #0074d9;
+    border: solid 1px #6acdfb;
     border-radius: 10px;
     transition: all 0.3s ease;
     font-weight: bold;
 }
 .userDataForm div button:hover {
     font-weight: bold;
-    color: #fff;
-    background-color: #0074d9;
+    color: #F9FAFB;
+    background-color: #53b7e6;
+}
+#error{
+    color: #F87171;
+    font-size: 0.9rem;
+    margin: 0 3px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+#settingsForm{
+    padding:20px;
+    width:50vw;
+    min-height: 85vh;
+    max-height: 99vh;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    height:auto;
+}
+
+#settingsForm h1{
+    width:100%;
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+    color: #5e5c5d
+}
+
+#settingsForm label{
+    width:100%;
+    padding:0 10px;
+    margin:2px 0;
+}
+#settingsForm input{
+    width: 100%;
+    padding: 8px 20px;
+    border-radius: 10px;
+    border: solid 1px #777275;
+    margin-bottom: 20px;
+}
+#settingsForm button{
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #6acdfb;
+    font-size: 0.9rem;
+    margin: 0 3px;
+    padding: 5px 10px;
+    border: solid 1px #6acdfb;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    font-weight: bold;
 }
