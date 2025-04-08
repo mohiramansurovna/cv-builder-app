@@ -35,8 +35,8 @@ all of the dependencies are listed in the package.json file. The main dependenci
 - nodemon: This is development dependency that will automatically restart the server when changes are made to the code
 
 ## Links
-- GitHub:
-- Deployed:
+- GitHub:https://github.com/mohiramansurovna/cv-builder-app
+- Deployed:https://maze-south-prawn.glitch.me/user/
 
 ## Project Structure
 
