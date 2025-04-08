@@ -36,7 +36,7 @@ all of the dependencies are listed in the package.json file. The main dependenci
 
 ## Links
 - GitHub:https://github.com/mohiramansurovna/cv-builder-app
-- Deployed:https://maze-south-prawn.glitch.me/user/
+- Deployed:https://befitting-merciful-occupation.glitch.me/auth/home
 
 ## Project Structure
 
